@@ -1,28 +1,33 @@
 public class EmpleadoTemporario extends Empleado {
-    private String nombre;
-    private String genero;
-    private double salarioBase;
-    private int horasTrabajadas;
-    private String departamento;
+     
     private int mesesContrato;
 
-    public EmpleadoTemporario(String nombre, double salarioBase, int horasTrabajadas, String departamento, int mesesContrato, String genero) {
-        this.nombre = nombre;
-        this.salarioBase = salarioBase;
-        this.horasTrabajadas = horasTrabajadas;
-        this.departamento = departamento;
-        this.mesesContrato = mesesContrato;
-        this.genero = genero;
+    public EmpleadoTemporario(String nombre, double salarioBase, int horasTrabajadas, double tarifaHora, String departamento, String genero,int mesesContrato) {
+        super(nombre, 0, horasTrabajadas, tarifaHora, departamento,genero);
+        this.mesesContrato=mesesContrato;
     }
 
+    
+    @Override
+        public double calcularSalario() {
+            // el salario de un empleado temporal podría ser simplemente el salario base
+            return getSalarioBase();
+        }
+        
+        @Override
     public void imprimirDetalles() {
-        System.out.println("Nombre: " + nombre);
-        System.out.println("Genero: " + super.getNombre());
-        System.out.println("Salario: " + salarioBase);
-        System.out.println("Horas trabajadas: " + horasTrabajadas);
-        System.out.println("Departamento: " + departamento);
-        System.out.println("Meses de contrato: " + mesesContrato);
+        super.imprimirDetalles();
+        System.out.println("Meses Contrato :"+getMesesContrato());
     }
+        // Más metodos
 
-    // Más metodos
+
+        public int getMesesContrato() {
+            return mesesContrato;
+        }
+
+
+        public void setMesesContrato(int mesesContrato) {
+            this.mesesContrato = mesesContrato;
+        }
 }

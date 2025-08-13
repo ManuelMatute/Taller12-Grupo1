@@ -25,7 +25,15 @@ public class Empresa {
         }
         return empleadosPorTipo;
     }
-
+    //Move method proveniente de la clase extinta "BuscadorEmpleado"
+    public static Empleado buscarEmpleadoPorNombre(String nombre, List<Empleado> empleados) {
+            for (Empleado empleado : empleados) {
+                if (empleado.getNombre().equals(nombre)) {
+                    return empleado;
+                }
+            }
+            return null;
+        }
     // Más metodos
 }
 

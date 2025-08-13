@@ -1,46 +1,22 @@
-public class Empleado {
+public abstract class Empleado {
     private String nombre;
     private double salarioBase;
     private int horasTrabajadas;
     private String departamento;
     private double tarifaHora;
+    private String genero; //Pull Up Field, el atributo genero se sube a la clase padre para que sea heredado
+    
 
-    public Empleado(){}
-    public Empleado(String nombre, double salarioBase, int horasTrabajadas, double tarifaHora, String departamento) {
+    public Empleado(String nombre, double salarioBase, int horasTrabajadas, double tarifaHora, String departamento, String genero) {
         this.nombre = nombre;
         this.salarioBase = salarioBase;
         this.horasTrabajadas = horasTrabajadas;
         this.tarifaHora = tarifaHora;
         this.departamento = departamento;
+        this.genero=genero;
     }
-
-    public double calcularSalario() {
-        double salarioTotal = salarioBase;
-        if (salarioBase>0) {
-            if (horasTrabajadas >= 0) {
-                // Horas trabajadas normales = 40;
-                if (horasTrabajadas > 40) {
-                    salarioTotal += (horasTrabajadas - 40) * 50; // Pago de horas extra
-                }
-            }else {
-                throw new IllegalArgumentException("Las horas trabajadas deben ser mayor o igual a 0");
-            }
-        } else {
-            throw new IllegalArgumentException("El salario debe ser mayor o igual a 0");
-        }
-        switch (departamento) {
-            case "Sistemas":
-                salarioTotal += 20;
-                break;
-            case "Contabilidad":
-                salarioTotal += 10;
-                break;
-            default:
-                break;
-        }
-        return salarioTotal;
-    }
-
+   
+    public abstract double calcularSalario();
     public String getNombre() {
         return nombre;
     }
@@ -79,6 +55,23 @@ public class Empleado {
 
     public void setDepartamento(String departamento) {
         this.departamento = departamento;
+    }
+    //Pull Up Method: el metodo imprimir detalles puede estar en la clase padre para mostrar los datos que heredan 
+    public void imprimirDetalles() {
+        System.out.println("Nombre: " + getNombre());
+        System.out.println("Genero: " + getGenero());
+        System.out.println("Salario: " + getSalarioBase());
+        System.out.println("Horas trabajadas: " + getHorasTrabajadas());
+        System.out.println("Departamento: " + getDepartamento());
+         
+    }
+
+    public String getGenero() {
+        return genero;
+    }
+
+    public void setGenero(String genero) {
+        this.genero = genero;
     }
 
     // Más metodos
